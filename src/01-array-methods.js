@@ -12,27 +12,29 @@ class ArrayByMatusha {
       this.length = 0;
     }
   }
-
-  push(a) {
-    this[this.length] = a;
-    this.length += 1;
-    return this;
-  }
-
-  shift() {
-    for (let i = 0; i < this.length; i += 1) {
-      this[i] = this[i + 1];
-      if (this[i + 1] === undefined) {
-        delete this[i]; // какая-то хуйня :(
-        this.length -= 1;
-      }
-    }
-    return this;
-  }
 }
 
+// eslint-disable-next-line func-names
+ArrayByMatusha.prototype.shift = function () {
+  for (let i = 0; i < this.length; i += 1) {
+    this[i] = this[i + 1];
+    if (this[i + 1] === undefined) {
+      delete this[i]; // какая-то хуйня :(
+      this.length -= 1;
+    }
+  }
+  return this;
+};
+
+// eslint-disable-next-line func-names
+ArrayByMatusha.prototype.push = function (a) {
+  this[this.length] = a;
+  this.length += 1;
+  return this;
+};
+
 const array = new ArrayByMatusha(1, 2);
-array.push(5);
+array.push(6).push(5);
 
 // console.log(array);
 
