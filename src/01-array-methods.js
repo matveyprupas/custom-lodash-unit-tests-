@@ -19,7 +19,7 @@ ArrayByMatusha.prototype.shift = function () {
   for (let i = 0; i < this.length; i += 1) {
     this[i] = this[i + 1];
     if (this[i + 1] === undefined) {
-      delete this[i]; // какая-то хуйня :(
+      delete this[i];
       this.length -= 1;
     }
   }
@@ -33,8 +33,8 @@ ArrayByMatusha.prototype.push = function (a) {
   return this;
 };
 
-const array = new ArrayByMatusha(1, 2);
-array.push(6).push(5);
+// const array = new ArrayByMatusha(1, 2);
+// array.push(6).push(5);
 
 // console.log(array);
 
@@ -47,7 +47,6 @@ function chunk(arr, n) {
   if (arr.length % n !== 0) {
     res[res.length] = new Array(arr.length % n);
   }
-
 
   res.forEach((el) => {
     for (let i = 0; i < el.length; i += 1) {
@@ -63,6 +62,34 @@ function chunk(arr, n) {
 // chunk(['a', 'b', 'c', 'd', 'e', 'f'], 2);
 // chunk(['a', 'b', 'c', 'd'], 2);
 
+function compact(arr) {
+  const result = [];
+  for (let i = 0; i < arr.length; i += 1) {
+    if (!!arr[i] !== false) result.push(arr[i]);
+  }
+  return result;
+}
+
+function drop(arr, n) {
+  if (n === 0) return arr;
+  const res = [];
+  const startIndex = n === undefined ? 1 : n;
+  // console.log(startIndex);
+  for (let i = startIndex; i < arr.length; i += 1) {
+    res.push(arr[i]);
+  }
+  // console.log(res);
+  return res;
+}
+
+// drop ([1, 2, 3, 4, 5], undefined);
+// drop ([1, 2, 3, 4, 5], 0);
+// drop ([1, 2, 3, 4, 5], 1);
+// drop ([1, 2, 3, 4, 5], 5);
+// drop ([1, 2, 3, 4, 5], 6);
+
 module.exports = {
   chunk,
+  compact,
+  drop,
 };
